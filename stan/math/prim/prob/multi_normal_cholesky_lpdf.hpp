@@ -47,7 +47,7 @@ template <bool propto, typename T_y, typename T_loc, typename T_covar,
               T_y, T_loc, T_covar>* = nullptr>
 return_type_t<T_y, T_loc, T_covar> multi_normal_cholesky_lpdf(
     const T_y& y, const T_loc& mu, const T_covar& L) {
-  static const char* function = "multi_normal_cholesky_lpdf";
+  static constexpr const char* function = "multi_normal_cholesky_lpdf";
   using T_covar_elem = typename scalar_type<T_covar>::type;
   using T_return = return_type_t<T_y, T_loc, T_covar>;
   using T_partials_return = partials_return_t<T_y, T_loc, T_covar>;
@@ -99,6 +99,8 @@ return_type_t<T_y, T_loc, T_covar> multi_normal_cholesky_lpdf(
                    "size of location parameter", size_mu);
   check_size_match(function, "Size of random variable", size_y,
                    "rows of covariance parameter", L.rows());
+  check_size_match(function, "Size of random variable", size_y,
+                   "columns of covariance parameter", L.cols());
 
   for (size_t i = 0; i < size_vec; i++) {
     check_finite(function, "Location parameter", mu_vec[i]);
@@ -204,7 +206,7 @@ template <bool propto, typename T_y, typename T_loc, typename T_covar,
               T_y, T_loc, T_covar>* = nullptr>
 return_type_t<T_y, T_loc, T_covar> multi_normal_cholesky_lpdf(
     const T_y& y, const T_loc& mu, const T_covar& L) {
-  static const char* function = "multi_normal_cholesky_lpdf";
+  static constexpr const char* function = "multi_normal_cholesky_lpdf";
   using T_covar_elem = typename scalar_type<T_covar>::type;
   using T_return = return_type_t<T_y, T_loc, T_covar>;
   using T_partials_return = partials_return_t<T_y, T_loc, T_covar>;
